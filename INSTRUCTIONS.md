@@ -20,11 +20,28 @@ analyze the video, extract structured knowledge, and push Markdown files directl
 3. **Analyze the YouTube video** — extract summary, key ideas, concepts, actions and open questions.
 4. **Check existing files** in `concepts/` and `topics/` to avoid duplicates and reuse existing slugs.
 5. **Push the following files** to this repo:
-   - `sources/youtube/YYYY/MM/<video-id>.md` — one source note per video
+   - `sources/youtube/YYYY/MM/<title-slug>.md` — one source note per video
    - `concepts/<concept-slug>.md` — one per **new** concept (skip if exists, add source reference if it does)
    - `topics/<topic-slug>.md` — one per **new** topic (skip if exists, add source reference if it does)
 6. **Update `atlas/index.md`** if any new topic was created — add it under the correct Area section.
 7. **Confirm** to the user which files were created or updated.
+
+---
+
+## Source file naming — IMPORTANT
+
+The source file name is derived from the **video title**, not the video ID.
+
+**Rules:**
+- Take the video title and convert it to a lowercase hyphenated slug.
+- Remove stop words, articles and filler words if the title is long (keep it under 6 words).
+- Use the `video_id` field inside the frontmatter to store the actual YouTube ID.
+- The wikilinks in topics and concepts must point to the slug, not the ID.
+
+**Examples:**
+- "Introduction to Quantitative Trading" → `intro-quantitative-trading.md`
+- "How to Build a Uniswap V4 Hook from Scratch" → `uniswap-v4-hook-from-scratch.md`
+- "The Randle Cycle Explained" → `randle-cycle-explained.md`
 
 ---
 
@@ -45,7 +62,7 @@ A video with topics that don't appear anywhere in `atlas/index.md` is broken. Ne
 
 ## File formats
 
-### Source note — `sources/youtube/YYYY/MM/<video-id>.md`
+### Source note — `sources/youtube/YYYY/MM/<title-slug>.md`
 
 ```md
 ---
@@ -89,7 +106,7 @@ type: concept
 slug: ""
 topics: []
 sources:
-  - "video-id"
+  - "title-slug"
 created_at: ""
 ---
 
@@ -110,7 +127,7 @@ created_at: ""
 # topic-slug
 
 ## Sources
-- [[video-id]]
+- [[title-slug]]
 ```
 
 ---
@@ -133,6 +150,7 @@ research, economics, psychology, productivity, other
 
 - **Atlas first**: before writing any file, read `atlas/index.md`. The atlas is the source of truth for areas and topics.
 - **Mandatory connection**: every video must link to ≥1 topic present in `atlas/index.md`. No orphan videos.
+- **Title as filename**: source files are named after the video title (slugified, max 6 words), never after the video ID.
 - **Language**: write notes in the same language as the video.
 - **Concepts**: lowercase hyphenated slugs, max 10 per video.
 - **Topics**: only from the controlled list above, max 5 per video.
@@ -147,7 +165,7 @@ research, economics, psychology, productivity, other
 
 ```
 atlas/index.md          ← master knowledge map, always read first
-sources/youtube/YYYY/MM/<video-id>.md
+sources/youtube/YYYY/MM/<title-slug>.md
 concepts/<concept-slug>.md
 topics/<topic-slug>.md
 indexes/
