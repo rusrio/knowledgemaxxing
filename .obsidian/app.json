@@ -1,1 +1,16 @@
-{}
+{
+  "useMarkdownLinks": false,
+  "newLinkFormat": "shortest",
+  "defaultViewMode": "preview",
+  "livePreview": true,
+  "legacyEditor": false,
+  "foldHeading": true,
+  "foldIndent": true,
+  "showFrontmatter": false,
+  "spellcheck": false,
+  "strictLineBreaks": false,
+  "smartIndentList": true,
+  "tabSize": 2,
+  "readableLineLength": true,
+  "theme": "obsidian"
+}
